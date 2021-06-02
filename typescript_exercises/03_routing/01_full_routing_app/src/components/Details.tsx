@@ -21,15 +21,12 @@ class Details extends React.Component<Props,State> {
 	}
 
 	componentDidMount() {
-		//let tempId:string = this.props.match.url.slice(-3);
-		let id:number = parseInt(this.props.match.params.id,10);
-		for(let i=0;i<this.props.list.length;i++) {
-			if(id === this.props.list[i].id) {
-				this.setState({
-					index:i
-				})
-			}
-		}
+		/*TODO Get the id of the detailed item from url
+		(this.props.match.params.id) and find the proper
+		list index of the item. Either save the index or
+		the item itself (you need to modify the existing state)
+		to the component state.
+		*/
 	}
 	
 	render() {
@@ -42,11 +39,9 @@ class Details extends React.Component<Props,State> {
 		}
 		return(
 			<div style={style}>
-				<h3>{this.props.list[this.state.index].name}</h3>
-				<p>Address:{this.props.list[this.state.index].address}</p>
-				<p>City:{this.props.list[this.state.index].city}</p>
-				<p>Country:{this.props.list[this.state.index].country}</p>
-				<p>Comment:{this.props.list[this.state.index].comment}</p>
+				//TODO Create a suitable detailed information box
+				//either by accessing the list at the saved index
+				//or using the saved item if you went that way.
 			</div>
 			
 			
