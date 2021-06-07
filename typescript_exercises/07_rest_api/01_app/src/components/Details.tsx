@@ -63,19 +63,7 @@ class Details extends React.Component<Props,State> {
 			textAlign:"center"
 		}
 		let hotel = this.props.list[this.state.index];
-		if(!this.state.edit) {
-			return(
-				<div style={style}>
-					<DetailsInfo hotel={hotel} editMode={this.editMode}/>
-				</div>	
-			)
-		} else {
-			return(
-				<div style={style}>
-					<EditDetails hotel={hotel} editItem={this.editItem}  cancel={this.cancel}/>
-				</div>
-			)
-		}
+		//TODO create conditional rendering based on the editMode in state. If it is false render DetailsInfo and if it is true render EditDetails. Both with proper props.
 	}
 }
 

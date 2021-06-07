@@ -23,6 +23,16 @@ class App extends React.Component<{},State> {
 		list:[]
 	}
 	
+	//TODO Remember to start the backend in another terminal using command "node app"
+	
+	/*
+		REST API
+		GET /api/hotel -> get all hotels
+		POST /api/hotel -> add new hotel. Needs the new hotel as body
+		DELETE /api/hotel/:id -> remove hotel by id
+		PUT /api/hotel/:id -> update the hotel by id. Needs the new hotel as body
+	*/
+	
 	componentDidMount() {
 		this.getList();
 	}
@@ -51,45 +61,19 @@ class App extends React.Component<{},State> {
 	} 
 	
 	getList = () => {		
-		const request = new Request("/api/hotel",{
-			method:"GET",
-			headers:{
-				"Content-type":"application/json"
-			}
-		})
-		this.handleFetch(request,"getlist");
+		//TODO create the request for getting the list
 	}
 	
 	addToList = (item:HotelInfo) => {
-		const request = new Request("/api/hotel",{
-			method:"POST",
-			headers:{
-				"Content-type":"application/json"
-			},
-			body:JSON.stringify(item)
-		})
-		this.handleFetch(request,"addtolist");
+		//TODO create the request for adding to the list
 	}
 	
 	removeFromList = (id:number) => {
-		const request = new Request("/api/hotel/"+id,{
-			method:"DELETE",
-			headers:{
-				"Content-type":"application/json"
-			}
-		})
-		this.handleFetch(request,"removefromlist");
+		//TODO create the request for removing from the list
 	}
 
 	editItem = (item:HotelInfo) => {
-		const request = new Request("/api/hotel/"+item.id,{
-			method:"PUT",
-			headers:{
-				"Content-type":"application/json"
-			},
-			body:JSON.stringify(item)
-		})
-		this.handleFetch(request,"edititem");		
+		//TODO create the request to edit item
 	}
 	
 	render() {

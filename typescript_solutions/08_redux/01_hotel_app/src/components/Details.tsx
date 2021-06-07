@@ -1,24 +1,46 @@
 import React from 'react';
-import {withRouter,RouteComponentProps,match} from 'react-router-dom'
+import {withRouter,RouteComponentProps} from 'react-router-dom'
 import HotelInfo from '../models/HotelInfo';
 import DetailsInfo from './DetailsInfo';
 import EditDetails from './EditDetails';
+import {connect, ConnectedProps} from 'react-redux';
+import {AnyAction} from 'redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {editItem} from '../actions/hotelActions';
 
 interface MatchDetails {
 	id:string;
 }
 
-interface Props extends RouteComponentProps<MatchDetails> {
-	list:HotelInfo[];	
-	editItem(item:HotelInfo):void;
+interface Props extends RouteComponentProps<MatchDetails>  {
 }
+
+interface ReduxState {
+	list:HotelInfo[];
+	loading:boolean;
+	error:string;
+}
+
+const mapStateToProps = (state:ReduxState) => {
+	return {
+		list:state.list
+	}
+}
+const mapDispatchToProps = (dispatch:ThunkDispatch<any,any,AnyAction>) => {
+	return {
+		edit:(item:HotelInfo) => dispatch(editItem(item)),
+	}
+}
+const connector = connect(mapStateToProps,mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface State {
 	index:number;
 	edit:boolean
 }
 
-class Details extends React.Component<Props,State> {
+class Details extends React.Component<Props & PropsFromRedux,State> {
 		
 	state:State = {
 		index:0,
@@ -49,7 +71,7 @@ class Details extends React.Component<Props,State> {
 	}
 	
 	editItem = (item:HotelInfo) => {
-		this.props.editItem(item);
+		this.props.edit(item);
 		this.cancel();
 		this.props.history.push("/");
 	}
@@ -79,4 +101,4 @@ class Details extends React.Component<Props,State> {
 	}
 }
 
-export default withRouter(Details);
+export default withRouter(connector(Details));
