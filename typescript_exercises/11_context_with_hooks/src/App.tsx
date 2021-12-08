@@ -4,7 +4,7 @@ import './App.css';
 import ShoppingItem from './components/ShoppingItem';
 import ShoppingForm from './components/ShoppingForm';
 import ShoppingList from './components/ShoppingList';
-import useLocale from './hooks/useLocale';
+
 
 interface State {
 	list:ShoppingItem[],
@@ -19,7 +19,8 @@ function App() {
 		id:100
 	});
 	
-	const locale = useLocale();
+	//TODO: Tuo useLocale hookilla changeLoc funktio App-komponenttiin ja kiinnitä se sopivasti en ja fi nappeihin
+
 	
 	const addToList = (item:ShoppingItem) => {
 		item.id = state.id;
@@ -45,8 +46,8 @@ function App() {
 	return (
 		<div className="App">
 			<div>
-				<button onClick={() => locale.changeLoc("en")}>En</button>
-				<button onClick={() => locale.changeLoc("fi")}>Fi</button>
+				<button onClick={// TODO: Tähän funktiokutsu }>En</button>
+				<button onClick={// TODO: Tähän funktiokutsu }>Fi</button>
 			</div>
 			<ShoppingForm addToList={addToList}/>
 			<hr/>
