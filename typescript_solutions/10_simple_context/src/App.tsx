@@ -22,7 +22,9 @@ function App() {
 		id:100
 	});
 	
-	//TODO luo tilamuuttuja tallentamaan nykyinen valittu lokaatio (en/fi)
+	const [loc,setLoc] = useState<Location>({
+		lo:localizations.en
+	})
 	
 	const addToList = (item:ShoppingItem) => {
 		item.id = state.id;
@@ -45,13 +47,24 @@ function App() {
 	}
 	
 	const changeLocation = (loc:string) => {
-		//TODO: lokalisaatiomuuttujan muuttaminen valittuun lokaatioon
+		if(loc === "en") {
+			setLoc({
+				lo:localizations.en
+			})
+		} else {
+			setLoc({
+				lo:localizations.fi
+			})			
+		}
 	}
 	
 	return (
-	<LocalContext.Provider value={//TODO: Lisää tilamuuttuja joka säätelee lokaatiota tähän}>
+	<LocalContext.Provider value={loc.lo}>
 		<div className="App">
-			//TODO: lisää napit englannin ja suomen kielen vaihtamiseksi.
+			<div>
+				<button onClick={() => changeLocation("en")}>En</button>
+				<button onClick={() => changeLocation("fi")}>Fi</button>
+			</div>
 			<ShoppingForm addToList={addToList}/>
 			<hr/>
 			<ShoppingList list={state.list} removeFromList={removeFromList}/>

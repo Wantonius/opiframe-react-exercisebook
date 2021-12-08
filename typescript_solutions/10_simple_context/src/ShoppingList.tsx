@@ -1,5 +1,6 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import ShoppingItem from './ShoppingItem';
+import LocalContext from './LocalContext';
 
 interface Props {
 	list:ShoppingItem[],
@@ -8,15 +9,15 @@ interface Props {
 
 const ShoppingList:React.FC<Props> = (props:Props) => {
 	
-	//TODO: Ota LocalContext käyttöön ja laita lokalisaatiostringit oikeille paikoilleen
-
+	const locations = useContext(LocalContext);
+	
 	let items = props.list.map((item) => {
 		return (
 			<tr key={item.id}>
 				<td>{item.type}</td>
 				<td>{item.count}</td>
 				<td>{item.price}</td>
-				<td><button onClick={() => props.removeFromList(item.id)}>Remove</button></td>
+				<td><button onClick={() => props.removeFromList(item.id)}>{locations.remove}</button></td>
 			</tr>
 		)
 	})
@@ -24,10 +25,10 @@ const ShoppingList:React.FC<Props> = (props:Props) => {
 		<table>
 			<thead>
 				<tr>
-					<th>Type</th>
-					<th>Count</th>
-					<th>Price</th>
-					<th>Remove</th>
+					<th>{locations.type}</th>
+					<th>{locations.count}</th>
+					<th>{locations.price}</th>
+					<th>{locations.remove}</th>
 				</tr>
 			</thead>
 			<tbody>

@@ -1,5 +1,6 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
 import ShoppingItem from './ShoppingItem';
+import LocalContext from './LocalContext';
 
 
 interface Props {
@@ -13,8 +14,6 @@ interface State {
 }
 
 const ShoppingForm:React.FC<Props> = (props:Props) => {
-	
-	//TODO: Ota LocalContext käyttöön ja laita lokalisaatiostringit oikeille paikoilleen
 	
 	const locations = useContext(LocalContext);
 	const [state,setState] = useState<State>({
@@ -43,26 +42,26 @@ const ShoppingForm:React.FC<Props> = (props:Props) => {
 	
 	return(
 		<form onSubmit={onSubmit}>
-			<label htmlFor="type">Type:</label>
+			<label htmlFor="type">{locations.type}:</label>
 			<input type="text"
 					name="type"
 					onChange={onChange}
 					value={state.type}/>
 			<br/>
-			<label htmlFor="count">Count:</label>
+			<label htmlFor="count">{locations.count}:</label>
 			<input type="number"
 					name="count"
 					onChange={onChange}
 					value={state.count}/>
 			<br/>
-			<label htmlFor="price">Price:</label>
+			<label htmlFor="price">{locations.price}:</label>
 			<input type="number"
 					name="price"
 					step="0.01"
 					onChange={onChange}
 					value={state.price}/>
 			<br/>
-			<input type="submit" value="Add"/>
+			<input type="submit" value={locations.add}/>
 		</form>
 	)
 }
